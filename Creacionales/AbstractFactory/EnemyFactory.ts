@@ -22,16 +22,16 @@ export class EnemyNormalFactory implements EnemyFactory {
 
 export class EnemyFireFactory implements EnemyFactory {
   createWarrior(): Warrior {
-    return new IceWarrior();
+    return new FireWarrior();
   }
   createMage(): Mage {
-    return new IceWarrior();
+    return new FireMage();
   }
 }
 
 export class EnemyIceFactory implements EnemyFactory {
   createWarrior(): Warrior {
-    return new FireMage();
+    return new IceWarrior();
   }
   createMage(): Mage {
     return new IceMage();
