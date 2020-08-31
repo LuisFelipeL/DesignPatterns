@@ -1,30 +1,23 @@
-import { FactoryDB } from "./FactoryDB";
-import { IConnection } from "./DB/IConnection";
+import {
+  IFactoryDB,
+  MySQLFactory,
+  OracleFactory,
+  PostgreSQLFactory,
+} from "./IFactoryDB";
 
-const FDB: FactoryDB = new FactoryDB();
+function initialize(database: IFactoryDB) {
+  const Cx = database.createConnection();
+  Cx.connect();
+  Cx.disconnect();
+}
 
 // Creando conexión con base de datos MySQL
-const cxMySQL: IConnection = FDB.getConnection("MySQL");
-cxMySQL.connect();
-cxMySQL.disconnect();
-
+initialize(new MySQLFactory());
 console.log("-------------------------------------------------");
 
 // Creando conexión con base de datos Oracle
-const cxOracle: IConnection = FDB.getConnection("Oracle");
-cxOracle.connect();
-cxOracle.disconnect();
-
+initialize(new OracleFactory());
 console.log("-------------------------------------------------");
 
 // Creando conexión con base de datos PostgreSQL
-const cxPostgreSQL: IConnection = FDB.getConnection("PostgreSQL");
-cxPostgreSQL.connect();
-cxPostgreSQL.disconnect();
-
-console.log("-------------------------------------------------");
-
-// Creando conexión con base de datos
-const cxTest: IConnection = FDB.getConnection("");
-cxTest.connect();
-cxTest.disconnect();
+initialize(new PostgreSQLFactory());
